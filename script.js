@@ -1,60 +1,61 @@
-// 1. 필요한 DOM 요소 가져오기
-const todoInput = document.getElementById('todo-input');
-const addButton = document.getElementById('add-button');
-const todoList = document.getElementById('todo-list');
+// 메뉴 데이터: 이름, 종류(type), 매운 정도(spicy), 가격대(budget)
+const menus = [
+    { name: '김치찌개', type: 'korean', spicy: 'medium', budget: 'mid' },
+    { name: '된장찌개', type: 'korean', spicy: 'mild', budget: 'mid' },
+    { name: '비빔밥', type: 'korean', spicy: 'medium', budget: 'mid' },
+    { name: '불고기', type: 'korean', spicy: 'mild', budget: 'high' },
+    { name: '삼겹살', type: 'korean', spicy: 'medium', budget: 'high' },
+
+    { name: '짜장면', type: 'chinese', spicy: 'mild', budget: 'low' },
+    { name: '짬뽕', type: 'chinese', spicy: 'hot', budget: 'mid' },
+    { name: '탕수육', type: 'chinese', spicy: 'mild', budget: 'high' },
+
+    { name: '초밥', type: 'japanese', spicy: 'mild', budget: 'high' },
+    { name: '라멘', type: 'japanese', spicy: 'medium', budget: 'mid' },
+    { name: '우동', type: 'japanese', spicy: 'mild', budget: 'mid' },
+
+    { name: '떡볶이', type: 'snack', spicy: 'hot', budget: 'low' },
+    { name: '김밥', type: 'snack', spicy: 'mild', budget: 'low' },
+    { name: '라면', type: 'snack', spicy: 'medium', budget: 'low' },
+];
+
+// DOM 요소 가져오기
+const typeSelect = document.getElementById('type-select');
+const spicySelect = document.getElementById('spicy-select');
+const budgetSelect = document.getElementById('budget-select');
+const recommendButton = document.getElementById('recommend-button');
+const resultText = document.getElementById('result-text');
 
 /**
- * 새로운 할 일 항목을 생성하고 목록에 추가하는 함수
+ * 사용자가 선택한 조건에 맞는 메뉴를 필터링하고,
+ * 그 중 하나를 랜덤으로 골라 결과를 화면에 보여주는 함수
  */
-function addTodoItem() {
-    // 1. 사용자 입력 값 가져오기 및 공백 제거
-    const todoText = todoInput.value.trim();
+function recommendMenu() {
+    const selectedType = typeSelect.value;      // 메뉴 종류 (korean, chinese, ...)
+    const selectedSpicy = spicySelect.value;    // 매운 정도 (mild, medium, hot)
+    const selectedBudget = budgetSelect.value;  // 가격대 (low, mid, high)
 
-    // 2. 입력 값 유효성 검사 (빈 문자열 방지)
-    if (todoText === '') {
-        alert('할 일을 입력해 주세요.');
-        return; // 함수 실행 중단
-    }
-
-    // 3. **DOM 조작:** 새로운 <li> 요소 생성 및 내용 구성
-    
-    // 3-1. <li> 요소 생성 및 클래스 추가
-    const listItem = document.createElement('li');
-    listItem.classList.add('todo-item');
-    
-    // 3-2. 텍스트를 담을 <span> 생성
-    const textSpan = document.createElement('span');
-    textSpan.textContent = todoText;
-
-    // 3-3. '삭제' 버튼 생성 및 클래스 추가
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = '삭제';
-    deleteButton.classList.add('delete-btn');
-    
-    // 3-4. **이벤트 리스너:** 삭제 버튼에 클릭 이벤트 연결
-    deleteButton.addEventListener('click', function() {
-        // 클릭된 버튼의 부모 요소(<li>)를 목록(<ul>)에서 제거합니다.
-        todoList.removeChild(listItem);
+    // 1. 조건에 맞게 메뉴 필터링
+    const filtered = menus.filter(menu => {
+        const typeMatch = (selectedType === 'any') || (menu.type === selectedType);
+        const spicyMatch = (selectedSpicy === 'any') || (menu.spicy === selectedSpicy);
+        const budgetMatch = (selectedBudget === 'any') || (menu.budget === selectedBudget);
+        return typeMatch && spicyMatch && budgetMatch;
     });
 
-    // 3-5. <li>에 텍스트와 버튼을 자식 요소로 추가
-    listItem.appendChild(textSpan);
-    listItem.appendChild(deleteButton);
-    
-    // 3-6. **DOM 조작:** 완성된 <li>를 <ul> 목록에 추가
-    todoList.appendChild(listItem);
+    // 2. 조건에 맞는 메뉴가 없는 경우
+    if (filtered.length === 0) {
+        resultText.textContent = '조건에 맞는 메뉴가 없습니다. 옵션을 조금 더 넓게 선택해 보세요!';
+        return;
+    }
 
-    // 4. 입력 필드 초기화 및 포커스 재설정
-    todoInput.value = '';
-    todoInput.focus();
+    // 3. Math.random()을 이용해 랜덤으로 하나 선택
+    const randomIndex = Math.floor(Math.random() * filtered.length);
+    const pickedMenu = filtered[randomIndex];
+
+    // 4. 결과 문구 구성 & 화면에 출력 (DOM 조작)
+    resultText.textContent = `추천 메뉴는 "${pickedMenu.name}" 입니다! 😋`;
 }
 
-// 5. '추가' 버튼에 클릭 이벤트 연결
-addButton.addEventListener('click', addTodoItem);
-
-// 6. Enter 키를 눌러도 항목이 추가되도록 이벤트 연결 (사용자 편의성)
-todoInput.addEventListener('keypress', function(event) {
-    if (event.key === 'Enter') {
-        addTodoItem();
-    }
-});
+// 버튼 클릭 이벤트 연결
+recommendButton.addEventListener('click', recommendMenu);
