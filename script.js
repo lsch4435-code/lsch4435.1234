@@ -136,7 +136,7 @@ const menus = [
   { name: '오꼬노미야끼', type: 'japanese', spicy: 'mild', budget: 'mid' },
   { name: '가라아게', type: 'japanese', spicy: 'mild', budget: 'mid' },
 
-  // ===== 분식/간식/기타 (snack) =====
+  // ===== 분식/간식 (snack) =====
   { name: '김밥', type: 'snack', spicy: 'mild', budget: 'low' },
   { name: '떡볶이', type: 'snack', spicy: 'hot', budget: 'low' },
   { name: '로제 떡볶이', type: 'snack', spicy: 'medium', budget: 'mid' },
@@ -144,10 +144,8 @@ const menus = [
   { name: '크림 떡볶이', type: 'snack', spicy: 'mild', budget: 'mid' },
   { name: '치즈볼', type: 'snack', spicy: 'mild', budget: 'mid' },
 
-  // 라면: 종류 통합 → 그냥 라면 하나만
   { name: '라면', type: 'snack', spicy: 'medium', budget: 'low' },
 
-  // 분식/야식
   { name: '순대', type: 'snack', spicy: 'mild', budget: 'low' },
   { name: '쫄면', type: 'snack', spicy: 'hot', budget: 'low' },
   { name: '튀김 모둠', type: 'snack', spicy: 'mild', budget: 'low' },
@@ -155,7 +153,6 @@ const menus = [
   { name: '만두', type: 'snack', spicy: 'mild', budget: 'low' },
   { name: '닭꼬치', type: 'snack', spicy: 'medium', budget: 'low' },
 
-  // 간식/디저트
   { name: '붕어빵', type: 'snack', spicy: 'mild', budget: 'low' },
   { name: '호떡', type: 'snack', spicy: 'mild', budget: 'low' },
   { name: '츄러스', type: 'snack', spicy: 'mild', budget: 'low' },
@@ -167,38 +164,38 @@ const menus = [
   { name: '생크림 케이크', type: 'snack', spicy: 'mild', budget: 'high' },
   { name: '크레이프 케이크', type: 'snack', spicy: 'mild', budget: 'high' },
 
-  // 파스타 / 양식 / 피자
-  { name: '로제 파스타', type: 'snack', spicy: 'medium', budget: 'mid' },
-  { name: '까르보나라 파스타', type: 'snack', spicy: 'mild', budget: 'mid' },
-  { name: '알리오 올리오 파스타', type: 'snack', spicy: 'mild', budget: 'mid' },
-  { name: '크림 파스타', type: 'snack', spicy: 'mild', budget: 'mid' },
-  { name: '불닭 까르보나라 파스타', type: 'snack', spicy: 'hot', budget: 'mid' },
+  // ===== 양식 (western) =====
+  { name: '로제 파스타', type: 'western', spicy: 'medium', budget: 'mid' },
+  { name: '까르보나라 파스타', type: 'western', spicy: 'mild', budget: 'mid' },
+  { name: '알리오 올리오 파스타', type: 'western', spicy: 'mild', budget: 'mid' },
+  { name: '크림 파스타', type: 'western', spicy: 'mild', budget: 'mid' },
+  { name: '불닭 까르보나라 파스타', type: 'western', spicy: 'hot', budget: 'mid' },
 
-  { name: '마르게리타 피자', type: 'snack', spicy: 'mild', budget: 'high' },
-  { name: '페퍼로니 피자', type: 'snack', spicy: 'mild', budget: 'high' },
-  { name: '고르곤졸라 피자', type: 'snack', spicy: 'mild', budget: 'high' },
-  { name: '불고기 피자', type: 'snack', spicy: 'mild', budget: 'high' },
-  { name: '새우 피자', type: 'snack', spicy: 'mild', budget: 'high' },
+  { name: '마르게리타 피자', type: 'western', spicy: 'mild', budget: 'high' },
+  { name: '페퍼로니 피자', type: 'western', spicy: 'mild', budget: 'high' },
+  { name: '고르곤졸라 피자', type: 'western', spicy: 'mild', budget: 'high' },
+  { name: '불고기 피자', type: 'western', spicy: 'mild', budget: 'high' },
+  { name: '새우 피자', type: 'western', spicy: 'mild', budget: 'high' },
 
-  { name: '함박스테이크', type: 'snack', spicy: 'mild', budget: 'high' },
-  { name: '리조또', type: 'snack', spicy: 'mild', budget: 'high' },
-  { name: '햄버거 세트', type: 'snack', spicy: 'mild', budget: 'mid' },
-  { name: '치즈버거 세트', type: 'snack', spicy: 'mild', budget: 'mid' },
+  { name: '함박스테이크', type: 'western', spicy: 'mild', budget: 'high' },
+  { name: '리조또', type: 'western', spicy: 'mild', budget: 'high' },
+  { name: '햄버거 세트', type: 'western', spicy: 'mild', budget: 'mid' },
+  { name: '치즈버거 세트', type: 'western', spicy: 'mild', budget: 'mid' },
 
-  // 동남아 / 멕시코 / 스페인 등
-  { name: '쌀국수(베트남)', type: 'snack', spicy: 'mild', budget: 'mid' },
-  { name: '분짜(베트남)', type: 'snack', spicy: 'mild', budget: 'mid' },
-  { name: '반미(베트남식 샌드위치)', type: 'snack', spicy: 'mild', budget: 'low' },
-  { name: '짜조(베트남 춘권)', type: 'snack', spicy: 'mild', budget: 'low' },
+  // ===== 동남아 (seasia) =====
+  { name: '쌀국수(베트남)', type: 'seasia', spicy: 'mild', budget: 'mid' },
+  { name: '분짜(베트남)', type: 'seasia', spicy: 'mild', budget: 'mid' },
+  { name: '반미(베트남식 샌드위치)', type: 'seasia', spicy: 'mild', budget: 'low' },
+  { name: '짜조(베트남 춘권)', type: 'seasia', spicy: 'mild', budget: 'low' },
 
-  { name: '팟타이(태국)', type: 'snack', spicy: 'mild', budget: 'mid' },
-  { name: '뿌팟퐁커리(태국)', type: 'snack', spicy: 'medium', budget: 'high' },
-  { name: '똠얌꿍(태국)', type: 'snack', spicy: 'hot', budget: 'high' },
-  { name: '그린 커리(태국)', type: 'snack', spicy: 'hot', budget: 'high' },
+  { name: '팟타이(태국)', type: 'seasia', spicy: 'mild', budget: 'mid' },
+  { name: '뿌팟퐁커리(태국)', type: 'seasia', spicy: 'medium', budget: 'high' },
+  { name: '똠얌꿍(태국)', type: 'seasia', spicy: 'hot', budget: 'high' },
+  { name: '그린 커리(태국)', type: 'seasia', spicy: 'hot', budget: 'high' },
 
-  { name: '빠에야(스페인)', type: 'snack', spicy: 'mild', budget: 'high' },
-  { name: '감바스 알 아히요(스페인)', type: 'snack', spicy: 'mild', budget: 'high' },
-  { name: '스페인식 또르티야(감자 오믈렛)', type: 'snack', spicy: 'mild', budget: 'mid' },
-
-  { name: '타코', type: 'snack', spicy: 'medium', budget: 'mid' },
+  // ===== 기타 (other: 스페인/멕시코 등) =====
+  { name: '빠에야(스페인)', type: 'other', spicy: 'mild', budget: 'high' },
+  { name: '감바스 알 아히요(스페인)', type: 'other', spicy: 'mild', budget: 'high' },
+  { name: '스페인식 또르티야(감자 오믈렛)', type: 'other', spicy: 'mild', budget: 'mid' },
+  { name: '타코', type: 'other', spicy: 'medium', budget: 'mid' },
 ];
