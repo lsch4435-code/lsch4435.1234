@@ -1,0 +1,108 @@
+/* 전체 레이아웃 설정 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* 컨테이너 (Todo List 전체 영역) */
+#todo-list-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    max-width: 450px;
+    width: 90%;
+}
+
+/* 제목 스타일 */
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+/* 입력 및 버튼 영역 (Flexbox로 정렬) */
+#todo-input-area {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 10px; 
+}
+
+/* 입력 필드 스타일 */
+#todo-input {
+    flex-grow: 1; 
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+#todo-input:focus {
+    border-color: #007bff; 
+    outline: none;
+}
+
+/* 추가 버튼 스타일 */
+#add-button {
+    padding: 12px 20px;
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#add-button:hover {
+    background-color: #0056b3; 
+}
+
+/* 투두 리스트 (ul) 스타일 */
+#todo-list {
+    list-style: none; 
+    padding: 0;
+    margin: 0;
+}
+
+/* 개별 리스트 항목 (li) 스타일 */
+.todo-item { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px; 
+    margin-bottom: 8px;
+    background-color: #f9f9f9; 
+    border-radius: 8px;
+    border-left: 5px solid #007bff; 
+    transition: background-color 0.2s;
+}
+
+.todo-item:hover {
+    background-color: #eeeeee;
+}
+
+/* 삭제 버튼 스타일 */
+.delete-btn { 
+    background: #dc3545; 
+    color: white; 
+    border: none; 
+    padding: 8px 12px; 
+    cursor: pointer; 
+    border-radius: 6px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #c82333; 
+}
