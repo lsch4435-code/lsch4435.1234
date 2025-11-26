@@ -199,3 +199,86 @@ const menus = [
   { name: '스페인식 또르티야(감자 오믈렛)', type: 'other', spicy: 'mild', budget: 'mid' },
   { name: '타코', type: 'other', spicy: 'medium', budget: 'mid' },
 ];
+
+
+// DOM 요소 가져오기
+const typeSelect = document.getElementById('type-select');
+const spicySelect = document.getElementById('spicy-select');
+const budgetSelect = document.getElementById('budget-select');
+const recommendButton = document.getElementById('recommend-button');
+const resultText = document.getElementById('result-text');
+
+/**
+ * 조건별로 메뉴 필터링하는 헬퍼 함수
+ */
+function filterMenus(selectedType, selectedSpicy, selectedBudget, options = {}) {
+  const { ignoreType = false, ignoreSpicy = false, ignoreBudget = false } = options;
+
+  return menus.filter(menu => {
+    const typeMatch =
+      ignoreType ||
+      selectedType === 'any' ||
+      menu.type === selectedType;
+
+    const spicyMatch =
+      ignoreSpicy ||
+      selectedSpicy === 'any' ||
+      menu.spicy === selectedSpicy;
+
+    const budgetMatch =
+      ignoreBudget ||
+      selectedBudget === 'any' ||
+      menu.budget === selectedBudget;
+
+    return typeMatch && spicyMatch && budgetMatch;
+  });
+}
+
+/**
+ * 사용자가 선택한 조건에 맞는 메뉴를 필터링하고,
+ * 조건이 너무 빡세서 없으면 자동으로 조금씩 완화해서
+ * 결국에는 무조건 하나는 추천해주는 함수
+ */
+function recommendMenu() {
+  const selectedType = typeSelect.value;      // 메뉴 종류
+  const selectedSpicy = spicySelect.value;    // 매운 정도
+  const selectedBudget = budgetSelect.value;  // 가격대
+
+  let filtered = [];
+  let messageSuffix = '';
+
+  // 1단계: 모든 조건 그대로 적용
+  filtered = filterMenus(selectedType, selectedSpicy, selectedBudget);
+  if (!filtered.length) {
+    // 2단계: 예산 무시
+    filtered = filterMenus(selectedType, selectedSpicy, selectedBudget, { ignoreBudget: true });
+    messageSuffix = ' (예산 조건을 조금 완화했어요)';
+  }
+  if (!filtered.length) {
+    // 3단계: 예산 + 매운 정도 둘 다 무시, 종류(type)는 유지
+    filtered = filterMenus(selectedType, selectedSpicy, selectedBudget, {
+      ignoreBudget: true,
+      ignoreSpicy: true,
+    });
+    messageSuffix = ' (매운 정도와 예산 조건을 조금 완화했어요)';
+  }
+  if (!filtered.length) {
+    // 4단계: 종류(type)까지 무시 → 전체 메뉴 중에서 랜덤
+    filtered = filterMenus(selectedType, selectedSpicy, selectedBudget, {
+      ignoreBudget: true,
+      ignoreSpicy: true,
+      ignoreType: true,
+    });
+    messageSuffix = ' (모든 조건을 조금 완화해서 골랐어요)';
+  }
+
+  // 여기까지 왔는데도 filtered가 비어 있을 가능성은 사실상 없음
+  const randomIndex = Math.floor(Math.random() * filtered.length);
+  const pickedMenu = filtered[randomIndex];
+
+  resultText.textContent = `추천 메뉴는 "${pickedMenu.name}" 입니다! 😋${messageSuffix}`;
+}
+
+// 버튼 클릭 이벤트 연결
+recommendButton.addEventListener('click', recommendMenu);
+
