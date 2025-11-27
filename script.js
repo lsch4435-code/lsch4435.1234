@@ -1,6 +1,7 @@
 // 메뉴 데이터: 이름, 종류(type), 매운 정도(spicy), 가격대(budget)
 const menus = [
   // ===== 한식 (korean) =====
+
   { name: '김치찌개', type: 'korean', spicy: 'medium', budget: 'mid' },
   { name: '된장찌개', type: 'korean', spicy: 'mild', budget: 'mid' },
   { name: '순두부찌개', type: 'korean', spicy: 'hot', budget: 'mid' },
@@ -198,6 +199,33 @@ const menus = [
   { name: '감바스 알 아히요(스페인)', type: 'other', spicy: 'mild', budget: 'high' },
   { name: '스페인식 또르티야(감자 오믈렛)', type: 'other', spicy: 'mild', budget: 'mid' },
   { name: '타코', type: 'other', spicy: 'medium', budget: 'mid' },
+  // ===== 추가 메뉴 =====
+  { name: '간장게장', type: 'korean', spicy: 'mild', budget: 'high' },
+  { name: '양념게장', type: 'korean', spicy: 'medium', budget: 'high' },
+  { name: '멸치국수', type: 'korean', spicy: 'mild', budget: 'low' },
+  { name: '떡만둣국', type: 'korean', spicy: 'mild', budget: 'mid' },
+  { name: '콩나물국', type: 'korean', spicy: 'mild', budget: 'low' },
+  { name: '전골', type: 'korean', spicy: 'medium', budget: 'mid' },
+  { name: '생선조림', type: 'korean', spicy: 'medium', budget: 'mid' },
+  { name: '물회', type: 'korean', spicy: 'medium', budget: 'mid' },
+  { name: '회덮밥', type: 'korean', spicy: 'medium', budget: 'mid' },
+  { name: '야채곱창', type: 'korean', spicy: 'hot', budget: 'mid' },
+
+  { name: '규카츠', type: 'japanese', spicy: 'mild', budget: 'high' },
+  { name: '돈까스', type: 'japanese', spicy: 'mild', budget: 'mid' },
+  { name: '소바', type: 'japanese', spicy: 'mild', budget: 'mid' },
+  { name: '밀푀유나베', type: 'japanese', spicy: 'mild', budget: 'high' },
+
+  { name: '계란말이', type: 'korean', spicy: 'mild', budget: 'low' },
+  { name: '샌드위치', type: 'western', spicy: 'mild', budget: 'mid' },
+  { name: '햄버거', type: 'western', spicy: 'mild', budget: 'mid' },
+  { name: '샐러드', type: 'western', spicy: 'mild', budget: 'mid' },
+
+  { name: '떡꼬치', type: 'snack', spicy: 'medium', budget: 'low' },
+  { name: '소떡소떡', type: 'snack', spicy: 'medium', budget: 'low' },
+  { name: '콘치즈', type: 'snack', spicy: 'mild', budget: 'low' },
+  { name: '주먹밥', type: 'snack', spicy: 'mild', budget: 'low' },
+
 ];
 
 
