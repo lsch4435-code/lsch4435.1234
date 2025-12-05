@@ -9,9 +9,12 @@
 <body>
   <div id="app-container">
     <h2>오늘 뭐 먹지? 🍙</h2>
-    <p class="desc">메뉴 종류 / 매운 정도 / 가격대를 선택하고 버튼을 누르면 메뉴를 추천해 줍니다.</p>
+    <p class="desc">
+      메뉴 종류 / 매운 정도 / 가격대를 선택하고 버튼을 누르면 메뉴를 추천해 줍니다.
+    </p>
 
     <div id="options-area">
+      <!-- 메뉴 종류 -->
       <div class="option-row">
         <label for="type-select">메뉴 종류</label>
         <select id="type-select">
@@ -26,6 +29,7 @@
         </select>
       </div>
 
+      <!-- 매운 정도 -->
       <div class="option-row">
         <label for="spicy-select">매운 정도</label>
         <select id="spicy-select">
@@ -36,6 +40,7 @@
         </select>
       </div>
 
+      <!-- 가격대 -->
       <div class="option-row">
         <label for="budget-select">가격대</label>
         <select id="budget-select">
@@ -51,7 +56,9 @@
 
     <div id="result-area">
       <h3>추천 메뉴</h3>
-      <p id="result-text">아직 추천받은 메뉴가 없습니다. 옵션을 선택하고 버튼을 눌러보세요!</p>
+      <p id="result-text">
+        아직 추천받은 메뉴가 없습니다. 옵션을 선택하고 버튼을 눌러보세요!
+      </p>
     </div>
   </div>
 
