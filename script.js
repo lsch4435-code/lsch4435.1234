@@ -120,4 +120,125 @@ const menus = [
   // ===== 기타 =====
   { name: "타코", type: TYPES.OTHER, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
   { name: "부리또", type: TYPES.OTHER, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
-  { name: "퀘사디아", type: TYPES.OTHER, spicy: SPICY.MEDIUM, budget: BUDGET
+  { name: "퀘사디아", type: TYPES.OTHER, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: "파에야", type: TYPES.OTHER, spicy: SPICY.MEDIUM, budget: BUDGET.HIGH },
+];
+
+// =============================
+//  3. DOM 요소 가져오기
+// =============================
+const typeSelect   = document.getElementById("type-select");
+const spicySelect  = document.getElementById("spicy-select");
+const budgetSelect = document.getElementById("budget-select");
+const recommendButton = document.getElementById("recommend-button");
+const resultText   = document.getElementById("result-text");
+
+// 혹시라도 id가 안 맞으면 콘솔에 경고 띄우기 (스크립트 안 죽게)
+if (!typeSelect || !spicySelect || !budgetSelect || !recommendButton || !resultText) {
+  console.warn(
+    "메뉴 추천기: HTML 요소 id를 확인해 주세요.\n" +
+    "script.js에서 사용하는 id는\n" +
+    "type-select, spicy-select, budget-select, recommend-button, result-text 입니다."
+  );
+}
+
+// =============================
+//  4. 조건별 메뉴 필터 함수
+// =============================
+function filterMenus(selectedType, selectedSpicy, selectedBudget, options = {}) {
+  const { ignoreType = false, ignoreSpicy = false, ignoreBudget = false } = options;
+
+  return menus.filter((menu) => {
+    const typeMatch =
+      ignoreType ||
+      selectedType === TYPES.ANY ||
+      selectedType === "any" ||
+      menu.type === selectedType;
+
+    const spicyMatch =
+      ignoreSpicy ||
+      selectedSpicy === SPICY.ANY ||
+      selectedSpicy === "any" ||
+      menu.spicy === selectedSpicy;
+
+    const budgetMatch =
+      ignoreBudget ||
+      selectedBudget === BUDGET.ANY ||
+      selectedBudget === "any" ||
+      menu.budget === selectedBudget;
+
+    return typeMatch && spicyMatch && budgetMatch;
+  });
+}
+
+// =============================
+//  5. 랜덤 메뉴 선택 (직전 메뉴랑 되도록 다르게)
+// =============================
+let lastPickedMenuName = null;
+
+function pickRandomMenu(candidates) {
+  if (candidates.length === 0) return null;
+  if (candidates.length === 1) {
+    lastPickedMenuName = candidates[0].name;
+    return candidates[0];
+  }
+
+  let picked = null;
+  let safetyCount = 0;
+
+  do {
+    const idx = Math.floor(Math.random() * candidates.length);
+    picked = candidates[idx];
+    safetyCount++;
+  } while (picked.name === lastPickedMenuName && safetyCount < 10);
+
+  lastPickedMenuName = picked.name;
+  return picked;
+}
+
+// =============================
+//  6. 메뉴 추천 로직
+// =============================
+function recommendMenu() {
+  if (!typeSelect || !spicySelect || !budgetSelect || !resultText) {
+    alert("HTML 요소 id가 스크립트와 안 맞아요. 콘솔 경고를 확인해 주세요!");
+    return;
+  }
+
+  const selectedType   = typeSelect.value;
+  const selectedSpicy  = spicySelect.value;
+  const selectedBudget = budgetSelect.value;
+
+  const strategies = [
+    { options: {}, message: "" },
+    { options: { ignoreBudget: true }, message: " (예산 조건을 조금 완화했어요)" },
+    { options: { ignoreBudget: true, ignoreSpicy: true }, message: " (매운 정도와 예산 조건을 조금 완화했어요)" },
+    { options: { ignoreBudget: true, ignoreSpicy: true, ignoreType: true }, message: " (모든 조건을 조금 완화해서 골랐어요)" },
+  ];
+
+  let filtered = [];
+  let messageSuffix = "";
+
+  for (const { options, message } of strategies) {
+    filtered = filterMenus(selectedType, selectedSpicy, selectedBudget, options);
+    if (filtered.length > 0) {
+      messageSuffix = message;
+      break;
+    }
+  }
+
+  if (!filtered.length) {
+    resultText.textContent = "추천할 메뉴가 없어요. 메뉴 데이터를 한 번 확인해 주세요!";
+    return;
+  }
+
+  const pickedMenu = pickRandomMenu(filtered);
+  resultText.textContent = `추천 메뉴는 "${pickedMenu.name}" 입니다! 😋${messageSuffix}`;
+}
+
+// =============================
+//  7. 이벤트 연결
+// =============================
+if (recommendButton) {
+  recommendButton.addEventListener("click", recommendMenu);
+}
