@@ -8,6 +8,291 @@ const menus = [
   { name: '부대찌개', type: 'korean', spicy: 'hot', budget: 'mid' },
   { name: '청국장찌개', type: 'korean', spicy: 'medium', budget: 'mid' },
   { name: '차돌 된장찌개', type: 'korean', spicy: 'mild', budget: 'mid' },
+// =============================
+//  1. 분류 상수 정의
+// =============================
+const TYPES = Object.freeze({
+  ANY: "any",
+  KOREAN: "korean",
+  CHINESE: "chinese",
+  JAPANESE: "japanese",
+  SNACK: "snack", // 분식/간식
+  WESTERN: "western",
+  SEASIA: "seasia", // 동남아
+  OTHER: "other", // 멕시코/스페인 등
+});
+
+const SPICY = Object.freeze({
+  ANY: "any",
+  MILD: "mild",
+  MEDIUM: "medium",
+  HOT: "hot",
+});
+
+const BUDGET = Object.freeze({
+  ANY: "any",
+  LOW: "low",
+  MID: "mid",
+  HIGH: "high",
+});
+
+// =============================
+//  2. 메뉴 데이터
+//    - name: 메뉴 이름
+//    - type: 종류 (TYPES.*)
+//    - spicy: 매운 정도 (SPICY.*)
+//    - budget: 가격대 (BUDGET.*)
+// =============================
+const menus = [
+  // ===== 한식 (korean) =====
+
+  { name: '김치찌개', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '된장찌개', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '순두부찌개', type: TYPES.KOREAN, spicy: SPICY.HOT, budget: BUDGET.MID },
+  { name: '부대찌개', type: TYPES.KOREAN, spicy: SPICY.HOT, budget: BUDGET.MID },
+  { name: '청국장찌개', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '차돌 된장찌개', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.MID },
+
+  { name: '비빔밥', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '육회 비빔밥', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.HIGH },
+  { name: '불고기', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.HIGH },
+  { name: '불고기 덮밥', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '삼겹살', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.HIGH },
+  { name: '삼겹살 덮밥', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '항정살 구이', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.HIGH },
+  { name: '한우 구이', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.HIGH },
+
+  { name: '제육볶음', type: TYPES.KOREAN, spicy: SPICY.HOT, budget: BUDGET.MID },
+  { name: '오징어 볶음', type: TYPES.KOREAN, spicy: SPICY.HOT, budget: BUDGET.MID },
+  { name: '낙지 볶음', type: TYPES.KOREAN, spicy: SPICY.HOT, budget: BUDGET.MID },
+  { name: '쭈꾸미 볶음', type: TYPES.KOREAN, spicy: SPICY.HOT, budget: BUDGET.MID },
+  { name: '고추장 불고기', type: TYPES.KOREAN, spicy: SPICY.HOT, budget: BUDGET.MID },
+
+  { name: '돼지국밥', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '순대국밥', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '콩나물국밥', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.LOW },
+  { name: '소머리국밥', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+
+  { name: '김치찜', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '갈비찜', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.HIGH },
+  { name: '수육', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.HIGH },
+
+  { name: '냉면', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '막국수', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '비빔면', type: TYPES.KOREAN, spicy: SPICY.HOT, budget: BUDGET.LOW },
+  { name: '콩국수', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '잔치국수', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.LOW },
+  { name: '닭칼국수', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '장칼국수', type: TYPES.KOREAN, spicy: SPICY.HOT, budget: BUDGET.MID },
+  { name: '바지락 칼국수', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '밀면', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '수제비', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.LOW },
+
+  { name: '김치찜', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '갈비', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.HIGH },
+  { name: '뚝배기 불고기 덮밥', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '함박스테이크 덮밥', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.MID },
+
+  { name: '간장게장', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.HIGH },
+  { name: '양념게장', type: TYPES.KOREAN, spicy: SPICY.HOT, budget: BUDGET.HIGH },
+  { name: '간장새우 덮밥', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '연어장 덮밥', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '육회', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.HIGH },
+
+  { name: '멸치국수', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.LOW },
+  { name: '떡만둣국', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '물회', type: TYPES.KOREAN, spicy: SPICY.HOT, budget: BUDGET.MID },
+  { name: '회덮밥', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '생선조림', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+
+  { name: '야채곱창', type: TYPES.KOREAN, spicy: SPICY.HOT, budget: BUDGET.MID },
+  { name: '곱창전골', type: TYPES.KOREAN, spicy: SPICY.HOT, budget: BUDGET.HIGH },
+  { name: '막창구이', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.HIGH },
+  { name: '대창구이', type: TYPES.KOREAN, spicy: SPICY.MEDIUM, budget: BUDGET.HIGH },
+
+  { name: '콩나물국', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.LOW },
+  { name: '계란말이', type: TYPES.KOREAN, spicy: SPICY.MILD, budget: BUDGET.LOW },
+
+  // ===== 분식 / 간식 (snack) =====
+  { name: '김밥', type: TYPES.SNACK, spicy: SPICY.MILD, budget: BUDGET.LOW },
+  { name: '치즈김밥', type: TYPES.SNACK, spicy: SPICY.MILD, budget: BUDGET.LOW },
+  { name: '참치김밥', type: TYPES.SNACK, spicy: SPICY.MILD, budget: BUDGET.LOW },
+  { name: '떡볶이', type: TYPES.SNACK, spicy: SPICY.MEDIUM, budget: BUDGET.LOW },
+  { name: '치즈 떡볶이', type: TYPES.SNACK, spicy: SPICY.MEDIUM, budget: BUDGET.LOW },
+  { name: '로제 떡볶이', type: TYPES.SNACK, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '마라 떡볶이', type: TYPES.SNACK, spicy: SPICY.HOT, budget: BUDGET.MID },
+  { name: '순대', type: TYPES.SNACK, spicy: SPICY.MILD, budget: BUDGET.LOW },
+  { name: '튀김 모둠', type: TYPES.SNACK, spicy: SPICY.MILD, budget: BUDGET.LOW },
+  { name: '라볶이', type: TYPES.SNACK, spicy: SPICY.HOT, budget: BUDGET.LOW },
+  { name: '핫도그', type: TYPES.SNACK, spicy: SPICY.MILD, budget: BUDGET.LOW },
+  { name: '떡꼬치', type: TYPES.SNACK, spicy: SPICY.MEDIUM, budget: BUDGET.LOW },
+  { name: '소떡소떡', type: TYPES.SNACK, spicy: SPICY.MEDIUM, budget: BUDGET.LOW },
+  { name: '콘치즈', type: TYPES.SNACK, spicy: SPICY.MILD, budget: BUDGET.LOW },
+  { name: '주먹밥', type: TYPES.SNACK, spicy: SPICY.MILD, budget: BUDGET.LOW },
+  { name: '라면', type: TYPES.SNACK, spicy: SPICY.MEDIUM, budget: BUDGET.LOW },
+  { name: '치즈라면', type: TYPES.SNACK, spicy: SPICY.MEDIUM, budget: BUDGET.LOW },
+  { name: '떡라면', type: TYPES.SNACK, spicy: SPICY.MEDIUM, budget: BUDGET.LOW },
+
+  // ===== 중식 (chinese) =====
+  { name: '짜장면', type: TYPES.CHINESE, spicy: SPICY.MILD, budget: BUDGET.LOW },
+  { name: '짬뽕', type: TYPES.CHINESE, spicy: SPICY.HOT, budget: BUDGET.MID },
+  { name: '삼선 짬뽕', type: TYPES.CHINESE, spicy: SPICY.HOT, budget: BUDGET.MID },
+  { name: '우동(중식)', type: TYPES.CHINESE, spicy: SPICY.MILD, budget: BUDGET.LOW },
+  { name: '탕수육', type: TYPES.CHINESE, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '깐풍기', type: TYPES.CHINESE, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '마파두부', type: TYPES.CHINESE, spicy: SPICY.HOT, budget: BUDGET.MID },
+  { name: '볶음밥', type: TYPES.CHINESE, spicy: SPICY.MEDIUM, budget: BUDGET.LOW },
+  { name: '잡채밥', type: TYPES.CHINESE, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '양장피', type: TYPES.CHINESE, spicy: SPICY.MEDIUM, budget: BUDGET.HIGH },
+
+  // ===== 일식 (japanese) =====
+  { name: '초밥', type: TYPES.JAPANESE, spicy: SPICY.MILD, budget: BUDGET.HIGH },
+  { name: '연어 초밥', type: TYPES.JAPANESE, spicy: SPICY.MILD, budget: BUDGET.HIGH },
+  { name: '모둠 초밥', type: TYPES.JAPANESE, spicy: SPICY.MILD, budget: BUDGET.HIGH },
+  { name: '규카츠', type: TYPES.JAPANESE, spicy: SPICY.MILD, budget: BUDGET.HIGH },
+  { name: '돈카츠', type: TYPES.JAPANESE, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '카레라이스', type: TYPES.JAPANESE, spicy: SPICY.MEDIUM, budget: BUDGET.LOW },
+  { name: '우동', type: TYPES.JAPANESE, spicy: SPICY.MILD, budget: BUDGET.LOW },
+  { name: '소바', type: TYPES.JAPANESE, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '라멘', type: TYPES.JAPANESE, spicy: SPICY.HOT, budget: BUDGET.MID },
+  { name: '밀푀유나베', type: TYPES.JAPANESE, spicy: SPICY.MILD, budget: BUDGET.HIGH },
+  { name: '오므라이스', type: TYPES.JAPANESE, spicy: SPICY.MILD, budget: BUDGET.MID },
+
+  // ===== 양식 (western) =====
+  { name: '피자', type: TYPES.WESTERN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '크림 파스타', type: TYPES.WESTERN, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '토마토 파스타', type: TYPES.WESTERN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '로제 파스타', type: TYPES.WESTERN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '함박 스테이크', type: TYPES.WESTERN, spicy: SPICY.MILD, budget: BUDGET.HIGH },
+  { name: '스테이크', type: TYPES.WESTERN, spicy: SPICY.MILD, budget: BUDGET.HIGH },
+  { name: '햄버거', type: TYPES.WESTERN, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '치즈버거', type: TYPES.WESTERN, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '샌드위치', type: TYPES.WESTERN, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '클럽 샌드위치', type: TYPES.WESTERN, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '샐러드', type: TYPES.WESTERN, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '리조또', type: TYPES.WESTERN, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+
+  // ===== 동남아 (seasia) =====
+  { name: '쌀국수', type: TYPES.SEASIA, spicy: SPICY.MILD, budget: BUDGET.MID },
+  { name: '분짜', type: TYPES.SEASIA, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '똠얌꿍', type: TYPES.SEASIA, spicy: SPICY.HOT, budget: BUDGET.HIGH },
+  { name: '그린 커리', type: TYPES.SEASIA, spicy: SPICY.HOT, budget: BUDGET.MID },
+  { name: '팟타이', type: TYPES.SEASIA, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '나시고렝', type: TYPES.SEASIA, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+
+  // ===== 기타 (멕시코 / 스페인 등, other) =====
+  { name: '타코', type: TYPES.OTHER, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '부리또', type: TYPES.OTHER, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '퀘사디아', type: TYPES.OTHER, spicy: SPICY.MEDIUM, budget: BUDGET.MID },
+  { name: '파에야', type: TYPES.OTHER, spicy: SPICY.MEDIUM, budget: BUDGET.HIGH },
+];
+
+// =============================
+//  3. DOM 요소 가져오기
+// =============================
+const typeSelect = document.getElementById("type-select");
+const spicySelect = document.getElementById("spicy-select");
+const budgetSelect = document.getElementById("budget-select");
+const recommendButton = document.getElementById("recommend-button");
+const resultText = document.getElementById("result-text");
+
+// =============================
+//  4. 조건별 메뉴 필터 함수
+// =============================
+function filterMenus(selectedType, selectedSpicy, selectedBudget, options = {}) {
+  const { ignoreType = false, ignoreSpicy = false, ignoreBudget = false } = options;
+
+  return menus.filter((menu) => {
+    const typeMatch =
+      ignoreType || selectedType === TYPES.ANY || selectedType === "any" || menu.type === selectedType;
+
+    const spicyMatch =
+      ignoreSpicy || selectedSpicy === SPICY.ANY || selectedSpicy === "any" || menu.spicy === selectedSpicy;
+
+    const budgetMatch =
+      ignoreBudget || selectedBudget === BUDGET.ANY || selectedBudget === "any" || menu.budget === selectedBudget;
+
+    return typeMatch && spicyMatch && budgetMatch;
+  });
+}
+
+// =============================
+//  5. 랜덤 메뉴 선택 (직전 메뉴랑 되도록 다르게)
+// =============================
+let lastPickedMenuName = null;
+
+function pickRandomMenu(candidates) {
+  if (candidates.length === 0) return null;
+  if (candidates.length === 1) {
+    lastPickedMenuName = candidates[0].name;
+    return candidates[0];
+  }
+
+  let picked = null;
+  let safetyCount = 0;
+
+  do {
+    const idx = Math.floor(Math.random() * candidates.length);
+    picked = candidates[idx];
+    safetyCount++;
+  } while (picked.name === lastPickedMenuName && safetyCount < 10);
+
+  lastPickedMenuName = picked.name;
+  return picked;
+}
+
+// =============================
+//  6. 메뉴 추천 로직
+//    - 조건이 빡세면 단계별로 완화
+// =============================
+function recommendMenu() {
+  const selectedType = typeSelect.value;      // 메뉴 종류
+  const selectedSpicy = spicySelect.value;    // 매운 정도
+  const selectedBudget = budgetSelect.value;  // 가격대
+
+  // 조건 완화 전략 모음
+  const strategies = [
+    { options: {}, message: "" },
+    {
+      options: { ignoreBudget: true },
+      message: " (예산 조건을 조금 완화했어요)",
+    },
+    {
+      options: { ignoreBudget: true, ignoreSpicy: true },
+      message: " (매운 정도와 예산 조건을 조금 완화했어요)",
+    },
+    {
+      options: { ignoreBudget: true, ignoreSpicy: true, ignoreType: true },
+      message: " (모든 조건을 조금 완화해서 골랐어요)",
+    },
+  ];
+
+  let filtered = [];
+  let messageSuffix = "";
+
+  for (const { options, message } of strategies) {
+    filtered = filterMenus(selectedType, selectedSpicy, selectedBudget, options);
+    if (filtered.length > 0) {
+      messageSuffix = message;
+      break;
+    }
+  }
+
+  if (!filtered.length) {
+    resultText.textContent =
+      "추천할 메뉴가 없어요. 메뉴 데이터를 한 번 확인해 주세요!";
+    return;
+  }
+
+  const pickedMenu = pickRandomMenu(filtered);
+
+  resultText.textContent = `추천 메뉴는 "${pickedMenu.name}" 입니다! 😋${messageSuffix}`;
+}
+
+// =============================
+//  7. 이벤트 연결
+// =============================
+recommendButton.addEventListener("click", recommendMenu);
 
   { name: '비빔밥', type: 'korean', spicy: 'medium', budget: 'mid' },
   { name: '육회 비빔밥', type: 'korean', spicy: 'medium', budget: 'high' },
